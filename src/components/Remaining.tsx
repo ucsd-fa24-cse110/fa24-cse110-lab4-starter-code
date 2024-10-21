@@ -3,9 +3,8 @@ import { AppContext } from "../context/AppContext";
 import { Modal, Button } from "react-bootstrap";
 
 const Remaining = () => {
-  const { expenses } = useContext(AppContext);
+  const { expenses, budget } = useContext(AppContext);
   const [showWarning, setShowWarning] = useState(false);
-  const budget = 1000; 
 
   const totalExpenses = expenses.reduce((total, item) => {
     return total + item.cost;
