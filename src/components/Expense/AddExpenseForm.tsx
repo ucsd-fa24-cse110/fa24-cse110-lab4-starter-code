@@ -3,6 +3,8 @@ const AddExpenseForm = () => {
   // Exercise: Consume the AppContext here
 
   // Exercise: Create name and cost to state variables
+  const [name, setName] = useState('');
+  const [cost, setCost] = useState<number>(0);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -22,6 +24,7 @@ const AddExpenseForm = () => {
             id="name"
             value={""}
             // HINT: onChange={}
+            onChange={(e)=>setName(e.target.value)}
           ></input>
         </div>
         <div className="col-sm">
@@ -33,6 +36,7 @@ const AddExpenseForm = () => {
             id="cost"
             value={0}
             // HINT: onChange={}
+            //onChange={(e)=>setCost(e.target.value)}
           ></input>
         </div>
         <div className="col-sm">
