@@ -30,6 +30,7 @@ const AddExpenseForm = () => {
             id="name"
             value={name}
             onChange={(e) => setName(e.target.value)}
+            data-testid="name-input"
           ></input>
         </div>
         <div className="col-sm">
@@ -41,10 +42,11 @@ const AddExpenseForm = () => {
             id="cost"
             value={cost}
             onChange={(e) => setCost(Number(e.target.value))}
+            data-testid="cost-input"
           ></input>
         </div>
         <div className="col-sm">
-          <button type="submit" className="btn btn-primary mt-3">
+          <button type="submit" className="btn btn-primary mt-3" data-testid="submit-expense">
             Save
           </button>
         </div>
