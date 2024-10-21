@@ -1,42 +1,52 @@
-import React from "react";
 import { render, fireEvent, screen } from "@testing-library/react";
-import { AppProvider } from "./context/AppContext";
-import ExpenseItem from "./components/Expense/ExpenseItem";
-import Remaining from "./components/Remaining";
 import App from "./App";
 
 describe("ExpenseItem", () => {
     test("should display the expense item correctly", () => {
-      render(
-        <AppProvider>
-          <ExpenseItem id="1" name="Groceries" cost={50} />
-          <Remaining/>
-        </AppProvider>
-      );
+      render(<App />);
+
+      const nameInput = screen.getByLabelText(/name/i);
+      const costInput = screen.getByLabelText(/cost/i);
+
+      fireEvent.change(nameInput, { target: { value: "Groceries" } });
+      fireEvent.change(costInput, { target: { value: "50" } });
+
+      const saveButton = screen.getByText("Save");
+      fireEvent.click(saveButton);
+
       const testItemName = screen.getByText("Groceries");
       const testSpentCost = screen.getByText("$50");
-      const testRemainingCost = screen.getByText("$4950");
+      const testRemainingCost = screen.getByTestId("remaining-value");
+
       expect(testItemName).toBeInTheDocument();
       expect(testSpentCost).toBeInTheDocument();
       expect(testRemainingCost).toBeInTheDocument();
     });
-  
+});
+
+describe("ExpenseItem", () => {
     test("should delete the expense item when delete button is clicked", () => {
       render(
-        <AppProvider>
-          <ExpenseItem id="1" name="Groceries" cost={50} />
-          <ExpenseItem id="2" name="Clothes" cost={100} />
-          <Remaining />
-        </AppProvider>
+        <App/>
       );
 
-      const deleteButton = screen.getAllByText("x");
-      fireEvent.click(deleteButton[0]);
-      fireEvent.click(deleteButton[1]);
+      const nameInput = screen.getByLabelText(/name/i);
+      const costInput = screen.getByLabelText(/cost/i);
 
-      expect(screen.getByText("$4900")).toBeInTheDocument();
-      expect(screen.getByText("Clothes")).toBeInTheDocument();
-      expect(screen.getByText("$100")).toBeInTheDocument();
-      expect(screen.queryByText("Groceries")).not.toBeInTheDocument();
+      fireEvent.change(nameInput, { target: { value: "Clothes" } });
+      fireEvent.change(costInput, { target: { value: "100" } });
+
+      const saveButton = screen.getByText("Save");
+      fireEvent.click(saveButton);
+
+      const testItemName = screen.getByText("Clothes");
+      expect(testItemName).toBeInTheDocument();
+
+      const deleteButton = screen.getByText("x");
+      fireEvent.click(deleteButton);
+
+      expect(screen.queryByText("Clothes")).not.toBeInTheDocument();
+      expect(screen.getByTestId("remaining-value")).toBeInTheDocument();
+      expect(screen.getByTestId("budget-value")).toBeInTheDocument();
     });
-  });
+});

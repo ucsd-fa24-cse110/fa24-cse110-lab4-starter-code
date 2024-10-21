@@ -20,7 +20,7 @@ const Remaining = () => {
   }, [remaining])
   return (
     <div className={`alert ${alertType}`}>
-      <span>Remaining: ${remaining}</span>
+      <span>Remaining: <span data-testid = "remaining-value">${remaining}</span></span>
     </div>
   );
 };
