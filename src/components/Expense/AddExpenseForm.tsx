@@ -36,7 +36,7 @@ const AddExpenseForm = () => {
             id="cost"
             value={0}
             // HINT: onChange={}
-            //onChange={(e)=>setCost(e.target.value)}
+            onChange={(e)=>setCost(Number(e.target.value))}
           ></input>
         </div>
         <div className="col-sm">
