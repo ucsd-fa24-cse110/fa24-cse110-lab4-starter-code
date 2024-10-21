@@ -1,16 +1,20 @@
 import { createContext, useState } from "react";
 import { Expense } from "../types/types";
+//import { Budget } from "../Budget/Budget"; dont uncommeny this
 
-// Exercise: Create add budget to the context
+// Exercise: Create add budget to the context DONE
+
 
 interface AppContextType {
   expenses: Expense[];
   setExpenses: React.Dispatch<React.SetStateAction<Expense[]>>;
+  budget: Number;
 }
 
 const initialState: AppContextType = {
   expenses: [],
   setExpenses: () => {},
+  budget: 1000
 };
 
 export const AppContext = createContext<AppContextType>(initialState);
@@ -23,6 +27,7 @@ export const AppProvider = (props: any) => {
       value={{
         expenses: expenses,
         setExpenses: setExpenses,
+        budget: 1000
       }}
     >
       {props.children}

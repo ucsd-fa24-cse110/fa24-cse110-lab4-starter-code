@@ -3,7 +3,9 @@ import { AppContext } from "../context/AppContext";
 
 const Remaining = () => {
   const { expenses } = useContext(AppContext);
-  let budget = 1000;
+  const { budget } = useContext(AppContext);
+
+  //let budget = 1000;
 
   const totalExpenses = expenses.reduce((total, item) => {
     return (total = total + item.cost);
@@ -12,7 +14,7 @@ const Remaining = () => {
   const alertType = totalExpenses > budget ? "alert-danger" : "alert-success";
 
   // Exercise: Create an alert when Remaining is less than 0. done
-  const remaining = budget - totalExpenses;
+   const remaining = Number(budget) - Number(totalExpenses);
 
   // Use useEffect to show an alert when remaining is less than 0 done
   useEffect(() => {
@@ -24,7 +26,7 @@ const Remaining = () => {
 
   return (
     <div className={`alert ${alertType}`}>
-      <span>Remaining: ${budget - totalExpenses}</span>
+      <span>Remaining: ${Number(budget) - totalExpenses}</span>
     </div>
   );
 };
