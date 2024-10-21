@@ -11,7 +11,7 @@ const Remaining = () => {
     return (total = total + item.cost);
   }, 0);
 
-  const alertType = totalExpenses > budget ? "alert-danger" : "alert-success";
+  const alertType = Number(totalExpenses) > Number(budget) ? "alert-danger" : "alert-success";
 
   // Exercise: Create an alert when Remaining is less than 0. done
    const remaining = Number(budget) - Number(totalExpenses);
