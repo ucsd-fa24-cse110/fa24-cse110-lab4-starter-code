@@ -10,19 +10,19 @@ const AddExpenseForm = () => {
   const { expenses, setExpenses } = useContext(AppContext);
 
   const [name, setName] = useState('');
-  const [cost, setCost] = useState(0);
+  const [cost, setCost] = useState('0');
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // Exercise: Add add new expense to expenses context array
 
-    const newExpense: Expense = {id: (expenses.length+1).toString(), name: name, cost: cost}
+    const newExpense: Expense = {id: (expenses.length+1).toString(), name: name, cost: parseInt(cost)}
 
     setExpenses([...expenses, newExpense]);
     //after submitting and filling in the form we reset the input values 
     setName('');
-    setCost(0);
+    setCost('');
   };
 
   return (
@@ -49,7 +49,7 @@ const AddExpenseForm = () => {
             id="cost"
             value={cost}
             // HINT: onChange={}
-            onChange={(e)=>setCost(parseInt(e.target.value))}
+            onChange={(e)=>setCost((e.target.value))}
           ></input>
         </div>
         <div className="col-sm">
