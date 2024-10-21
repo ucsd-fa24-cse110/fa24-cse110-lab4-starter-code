@@ -1,6 +1,7 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
+import React, { Component } from 'react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
+import { AppProvider } from './context/AppContext';
 
 test('renders learn react link', () => {
   render(<App />);
@@ -9,7 +10,15 @@ test('renders learn react link', () => {
 });
 
 describe('Budget Tracking Application',()=>{
-  test('creates a new expense and updates totals', () =>{
-    renderWithContext()
+  test('creates a new expense', () =>{
+    render(<AppProvider><App/></AppProvider>)
+    const nameInput = screen.getByLabelText(/name/i);
+    const costInput = screen.getByLabelText(/cost/i);
+    const saveButton = screen.getByText(/save/i);
+    fireEvent.change(nameInput, {target: {value: 'Test Expense'}});
+    fireEvent.change(costInput, {target: {value:'50'}});
+    fireEvent.click(saveButton);
+    expect(screen.getByText(/Test Expense/i)).toBeInTheDocument();
+    expect(screen.getByText(/\$50/)).toBeInTheDocument();
   });
 });
