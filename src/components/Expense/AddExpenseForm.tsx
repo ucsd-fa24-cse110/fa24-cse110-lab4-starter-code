@@ -1,13 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AppContext } from "../../context/AppContext"; 
+
 const AddExpenseForm = () => {
   // Exercise: Consume the AppContext here
+  const { setExpenses } = useContext(AppContext); 
 
   // Exercise: Create name and cost to state variables
+  const [name, setName] = useState<string>("");
+  const [cost, setCost] = useState<number>(0);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (!name || cost <= 0) {
+      alert("Please enter a valid name and cost.");
+      return;
+    }
+
     // Exercise: Add add new expense to expenses context array
+    const newExpense = {
+      id: Date.now().toString(), 
+      name,
+      cost,
+    };
+
+    setExpenses((prevExpenses) => [...prevExpenses, newExpense]); 
+
+    setName("");
+    setCost(0);
+
   };
 
   return (
@@ -20,7 +41,8 @@ const AddExpenseForm = () => {
             type="text"
             className="form-control"
             id="name"
-            value={""}
+            value={name} 
+            onChange={(e) => setName(e.target.value)} 
             // HINT: onChange={}
           ></input>
         </div>
@@ -28,10 +50,11 @@ const AddExpenseForm = () => {
           <label htmlFor="cost">Cost</label>
           <input
             required
-            type="text"
+            type="number"
             className="form-control"
             id="cost"
-            value={0}
+            value={cost} 
+            onChange={(e) => setCost(parseFloat(e.target.value))} // check
             // HINT: onChange={}
           ></input>
         </div>
