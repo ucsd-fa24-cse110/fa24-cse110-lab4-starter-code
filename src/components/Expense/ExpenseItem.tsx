@@ -6,7 +6,7 @@ const ExpenseItem = (currentExpense: Expense) => {
   // Exercise: Consume the AppContext here
   const { expenses, setExpenses} = useContext(AppContext);
 
-  const handleDeleteExpense = (currentExpense: Expense) => {
+  const handleDeleteExpense = (expenseToDelete: Expense) => {
     // Exercise: Remove expense from expenses context array
     const updatedExpense = expenses.filter(
       (expense) => expense.id !== expenseToDelete.id
