@@ -1,17 +1,34 @@
-import React, { useState } from "react";
-const AddExpenseForm = () => {
-  // Exercise: Consume the AppContext here
+import React, { useContext, useState } from "react";
+import { AppContext } from "../../context/AppContext";
 
-  // Exercise: Create name and cost to state variables
+const AddExpenseForm = () => {
+  // Consume the AppContext here
+  const { expenses, setExpenses } = useContext(AppContext);
+
+  // Create name and cost state variables
+  const [name, setName] = useState('');
+  const [cost, setCost] = useState('');
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Exercise: Add add new expense to expenses context array
+    // Create new expense object
+    const newExpense = {
+      id: (expenses.length + 1).toString(),  // or you can use a unique id generator
+      name,
+      cost: parseFloat(cost.toString()), // Make sure cost is a number
+    };
+
+    // Add new expense to the existing expenses array
+    setExpenses([...expenses, newExpense]);
+
+    // Reset form fields
+    setName('');
+    setCost('');
   };
 
   return (
-    <form onSubmit={(event) => onSubmit(event)}>
+    <form onSubmit={onSubmit}>
       <div className="row">
         <div className="col-sm">
           <label htmlFor="name">Name</label>
@@ -20,20 +37,20 @@ const AddExpenseForm = () => {
             type="text"
             className="form-control"
             id="name"
-            value={""}
-            // HINT: onChange={}
-          ></input>
+            value={name}
+            onChange={(event) => setName(event.target.value)}  // Handle name input change
+          />
         </div>
         <div className="col-sm">
           <label htmlFor="cost">Cost</label>
           <input
             required
-            type="text"
+            type="number"
             className="form-control"
             id="cost"
-            value={0}
-            // HINT: onChange={}
-          ></input>
+            value={cost}
+            onChange={(event) => setCost(event.target.value)}  // Handle cost input change
+          />
         </div>
         <div className="col-sm">
           <button type="submit" className="btn btn-primary mt-3">
