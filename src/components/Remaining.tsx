@@ -11,10 +11,10 @@ const Remaining = () => {
 
   const alertType = totalExpenses > budget ? "alert-danger" : "alert-success";
 
-  // Exercise: Create an alert when Remaining is less than 0.
+  // Exercise: Create an alert when Remaining is less than 0. done
   const remaining = budget - totalExpenses;
 
-  // Use useEffect to show an alert when remaining is less than 0
+  // Use useEffect to show an alert when remaining is less than 0 done
   useEffect(() => {
     if (remaining < 0) {
       window.alert("Warning: Budget is less than 0!");
