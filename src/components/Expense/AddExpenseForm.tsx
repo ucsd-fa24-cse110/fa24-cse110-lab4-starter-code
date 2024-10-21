@@ -1,13 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+//- Import useContext from React and AppContext from your context file
+import { AppContext } from "../../context/AppContext";
+
+
 const AddExpenseForm = () => {
   // Exercise: Consume the AppContext here
+  const { expenses, setExpenses } = useContext(AppContext);
 
   // Exercise: Create name and cost to state variables
+  const [name, setName] = useState("");
+  const [cost, setCost] = useState(0);
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     // Exercise: Add add new expense to expenses context array
+    const newExpense = { name, cost };
+    // setExpenses([...expenses, newExpense]);
+    setName("");
+    setCost(0);
+
+    
   };
 
   return (
