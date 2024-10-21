@@ -3,8 +3,11 @@ import Budget from "../components/Budget/Budget";
 import ExpenseList from "../components/Expense/ExpenseList";
 import ExpenseTotal from "../components/Expense/ExpenseTotal";
 import Remaining from "../components/Remaining";
+import { useContext } from "react";
+import { AppContext } from "../context/AppContext";
 
 export const MyBudgetTracker = () => {
+  const { expenses, setExpenses } = useContext(AppContext)
   return (
     <div className="container">
       <h1 className="mt-3">My Budget Planner</h1>
