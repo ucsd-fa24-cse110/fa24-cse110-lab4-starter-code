@@ -4,7 +4,7 @@ import App from './App';
 
 test('renders learn react link', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
+  const linkElement = screen.getByText("My Budget Planner");
   expect(linkElement).toBeInTheDocument();
 });
 
@@ -16,14 +16,14 @@ describe("Create an expense", () => {
 
     const createNoteNameInput = screen.getByLabelText("Name");
     const createNoteCostInput = screen.getByLabelText("Cost");
-    const createNoteButton = screen.getByLabelText("Save");
+    const createNoteButton = screen.getByTestId("Save");
 
     fireEvent.change(createNoteNameInput, { target: {value: "New Expense" } });
-    fireEvent.change(createNoteCostInput, { target: {value: "New Cost" } });
+    fireEvent.change(createNoteCostInput, { target: {value: 10 } });
     fireEvent.click(createNoteButton);
 
     const newNoteTitle = screen.getByText("New Expense");
-    const newNoteCost = screen.getByText("New Cost");
+    const newNoteCost = screen.getByText("$10");
 
     expect(newNoteTitle).toBeInTheDocument();
     expect(newNoteCost).toBeInTheDocument();
