@@ -1,8 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AppContext } from "../../context/AppContext";
+import { Expense } from "../../types/types";
+
 const AddExpenseForm = () => {
   // Exercise: Consume the AppContext here
 
   // Exercise: Create name and cost to state variables
+  const { expenses, setExpenses } = useContext(AppContext);
+
   const [name, setName] = useState('');
   const [cost, setCost] = useState<number>(0);
 
@@ -10,6 +15,16 @@ const AddExpenseForm = () => {
     event.preventDefault();
 
     // Exercise: Add add new expense to expenses context array
+    const newExpense: Expense = {
+      id: Math.random().toString(),
+      name: name,
+      cost: cost,
+    };
+
+    setExpenses([...expenses, newExpense]);
+    //after submitting and filling in the form we reset the input values 
+    setName('');
+    setCost(0);
   };
 
   return (
