@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
-import App from './App';
-import { AppProvider } from './context/AppContext';
+import App from '../App';
+import { AppProvider } from '../context/AppContext';
 
 describe('Budget Tracking Application',()=>{
   test('creates a new expense', () =>{
@@ -15,6 +15,4 @@ describe('Budget Tracking Application',()=>{
     expect(screen.getByText(/Test Expense/i)).toBeInTheDocument();
     expect(screen.getByText(/\$50/)).toBeInTheDocument();
   });
-
-  
 });
