@@ -14,15 +14,13 @@ const AddExpenseForm = () => {
 
     // Create new expense object
     const newExpense = {
-      id: (expenses.length + 1).toString(),  // or you can use a unique id generator
+      id: (expenses.length + 1).toString(),  
       name,
-      cost: parseFloat(cost.toString()), // Make sure cost is a number
+      cost: parseFloat(cost.toString()), 
     };
 
-    // Add new expense to the existing expenses array
     setExpenses([...expenses, newExpense]);
 
-    // Reset form fields
     setName('');
     setCost('');
   };
@@ -38,7 +36,7 @@ const AddExpenseForm = () => {
             className="form-control"
             id="name"
             value={name}
-            onChange={(event) => setName(event.target.value)}  // Handle name input change
+            onChange={(event) => setName(event.target.value)}  
           />
         </div>
         <div className="col-sm">
@@ -49,7 +47,7 @@ const AddExpenseForm = () => {
             className="form-control"
             id="cost"
             value={cost}
-            onChange={(event) => setCost(event.target.value)}  // Handle cost input change
+            onChange={(event) => setCost(event.target.value)}  
           />
         </div>
         <div className="col-sm">
