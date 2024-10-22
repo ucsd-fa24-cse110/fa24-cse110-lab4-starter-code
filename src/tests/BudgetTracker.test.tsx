@@ -2,6 +2,7 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor, act} from '@testing-library/react';
 import App from '../App';
 import { AppProvider } from '../context/AppContext';
+import Remaining from '../components/Remaining';
 
 describe('Budget Tracking Application',()=>{
   test('creates a new expense', async () =>{
@@ -106,6 +107,71 @@ describe('Budget Tracking Application',()=>{
     await waitFor(()=>{
         const deletedExpense = screen.queryByText("car");
         expect(deletedExpense).not.toBeInTheDocument();
+    });
+  });
+
+  test('Delete multiple', async ()=> {
+    render(<AppProvider><App/></AppProvider>);
+    //same code as above, this is populating the expenses such that there are 
+    const nameInput = screen.getByLabelText("Name");
+    const costInput = screen.getByLabelText("Cost");
+    const saveButton = screen.getByText("Save");
+    fireEvent.change(costInput, {target: {value:50}});
+    fireEvent.change(nameInput, {target: {value:"car"}})
+    fireEvent.click(saveButton);
+    fireEvent.change(costInput, {target: {value:100}});
+    fireEvent.change(nameInput, {target: {value:"tires"}})
+    fireEvent.click(saveButton);
+    fireEvent.change(costInput, {target: {value:200}});
+    fireEvent.change(nameInput, {target: {value:"insurance"}})
+    fireEvent.click(saveButton);
+    const newBudget2 = screen.getByText("Remaining: $650");
+    expect(newBudget2).toBeInTheDocument();
+    const newTotalSpent2 = screen.getByText("Spent so far: $350");
+    expect(newTotalSpent2).toBeInTheDocument();
+    //at this point there should be three expenses
+    //store the delete button for later use with fireEvent
+    const deleteButton = screen.getAllByText("x")[0];
+    //simulate the user clicking the x button 
+    fireEvent.click(deleteButton);
+    //this checks to see if the expense is removed
+    await waitFor(()=>{
+        const deletedExpense = screen.queryByText("car");
+        expect(deletedExpense).not.toBeInTheDocument();
+        //check to see if the total spent is correctly updated
+        //the car expense was 50 so subtract 50 
+        const TotalSpentDelete1 = screen.getByText("Spent so far: $300");
+        expect(TotalSpentDelete1).toBeInTheDocument();
+        //check to see if remaining is properly updated
+        //add 50 back into the remaining 
+        const RemainingDelete1 = screen.getByText("Remaining: $700");
+        expect(RemainingDelete1).toBeInTheDocument();
+    });
+    fireEvent.click(deleteButton);
+    await waitFor(()=>{
+        const deletedExpense = screen.queryByText("tires");
+        expect(deletedExpense).not.toBeInTheDocument();
+        //check to see if the total spent is correctly updated
+        //the tires were 100 so subtract 100 
+        const TotalSpentDelete2 = screen.getByText("Spent so far: $200");
+        expect(TotalSpentDelete2).toBeInTheDocument();
+        //check to see if the remaining is properly updated
+        //add 100 back into the remaining 
+        const RemainingDelete2 = screen.getByText("Remaining: $800");
+        expect(RemainingDelete2).toBeInTheDocument();
+    });
+    fireEvent.click(deleteButton);
+    await waitFor(()=>{
+        const deletedExpense = screen.queryByText("insurance");
+        expect(deletedExpense).not.toBeInTheDocument();
+        //check to see if the total spent is correctly updated
+        //the tires were 200 so subtract 200 = 0 
+        const TotalSpentDelete3 = screen.getByText("Spent so far: $0");
+        expect(TotalSpentDelete3).toBeInTheDocument();
+        //check to see if the remaining is properly updated
+        //add 200 back into the remaining 
+        const RemainingDelete3 = screen.getByText("Remaining: $1000");
+        expect(RemainingDelete3).toBeInTheDocument();
     });
   });
 
