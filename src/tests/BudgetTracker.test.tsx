@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { render, screen, fireEvent, waitFor, act} from '@testing-library/react';
 import App from '../App';
 import { AppProvider } from '../context/AppContext';
@@ -6,25 +6,35 @@ import { AppProvider } from '../context/AppContext';
 describe('Budget Tracking Application',()=>{
   test('creates a new expense', async () =>{
     render(<AppProvider><App/></AppProvider>);
-    const nameInput = screen.getByLabelText(/name/i);
-    const costInput = screen.getByLabelText(/cost/i);
-    const saveButton = screen.getByText(/save/i);
+    const ogRemaining = screen.getByText("Remaining: $1000");
+    expect(ogRemaining).toBeInTheDocument();
 
-    fireEvent.change(nameInput, {target: {value: 'Test Expense'}});
-    fireEvent.change(costInput, {target: {value:'50'}});
+    const ogBudget = screen.getByText("Budget: $1000");
+    expect(ogBudget).toBeInTheDocument();
+
+    const ogTotalSpent = screen.getByText("Spent so far: $0");
+    expect(ogTotalSpent).toBeInTheDocument();
+
+
+    const nameInput = screen.getByLabelText("Name");
+    const costInput = screen.getByLabelText("Cost");
+    const saveButton = screen.getByText("Save");
+
+    fireEvent.change(costInput, {target: {value:50}});
+    fireEvent.change(nameInput, {target: {value:"car"}})
     fireEvent.click(saveButton);
 
-    const newExpenseTitle = screen.getByText("Test Expense");
+    const newExpenseTitle = screen.getByText("car");
     const newBudgetNum = screen.getByText("$50");
     expect(newExpenseTitle).toBeInTheDocument;
     expect(newBudgetNum).toBeInTheDocument;
 
-    //checking to see if the total and remaining budget are correctly updated
-    //budget should now be $950
-    await waitFor(()=> {
-        const remainingBudget = screen.getByText("$950");
-        expect(remainingBudget).toBeInTheDocument();
-    });
+    const newBudget = screen.getByText("Remaining: $950");
+    expect(newBudget).toBeInTheDocument();
+
+    const newTotalSpent = screen.getByText("Spent so far: $50");
+    expect(newTotalSpent).toBeInTheDocument();
+
   });
 
 
