@@ -107,6 +107,8 @@ describe('Budget Tracking Application',()=>{
     await waitFor(()=>{
         const deletedExpense = screen.queryByText("car");
         expect(deletedExpense).not.toBeInTheDocument();
+        const deletedCost = screen.queryByText($50);
+        expect(deletedCost).not.toBeInTheDocument();
     });
   });
 
