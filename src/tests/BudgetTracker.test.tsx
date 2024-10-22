@@ -71,11 +71,42 @@ describe('Budget Tracking Application',()=>{
     const newBudget2 = screen.getByText("Remaining: $850");
     expect(newBudget2).toBeInTheDocument();
     //now we should have spent so far 50+100=150
-    const newTotalSpent2 = screen.getByText("Spent so far: 150");
+    const newTotalSpent2 = screen.getByText("Spent so far: $150");
     expect(newTotalSpent2).toBeInTheDocument();
   });
 
-  
-
+  test('Delete an expense', async () =>{
+    render(<AppProvider><App/></AppProvider>);
+    //checking to see if the screen properly displays the Remaining: $1000 initally
+    const ogRemaining = screen.getByText("Remaining: $1000");
+    expect(ogRemaining).toBeInTheDocument();
+    //capturing proper input fields necessary to simulate the user inputting an expense
+    const nameInput = screen.getByLabelText("Name");
+    const costInput = screen.getByLabelText("Cost");
+    const saveButton = screen.getByText("Save");
+    //using fireEvent to simulate the user loggin an expense 
+    //the fireEvent inputs 50 as the cost and "car" as the name 
+    //then it clicks the save button to log in the inputs 
+    fireEvent.change(costInput, {target: {value:50}});
+    fireEvent.change(nameInput, {target: {value:"car"}})
+    fireEvent.click(saveButton);
+    const newExpenseTitle = screen.getByText("car");
+    const newBudgetNum = screen.getByText("$50");
+    expect(newExpenseTitle).toBeInTheDocument;
+    expect(newBudgetNum).toBeInTheDocument;
+    const newBudget = screen.getByText("Remaining: $950");
+    expect(newBudget).toBeInTheDocument();
+    const newTotalSpent = screen.getByText("Spent so far: $50");
+    expect(newTotalSpent).toBeInTheDocument();
+    //store the delete button for later use with fireEvent
+    const deleteButton = screen.getAllByText("x")[0];
+    //simulate the user clicking the x button 
+    fireEvent.click(deleteButton);
+    //this checks to see if the expense is removed
+    await waitFor(()=>{
+        const deletedExpense = screen.queryByText("car");
+        expect(deletedExpense).not.toBeInTheDocument();
+    });
+  });
 
 });
