@@ -21,7 +21,7 @@ const AddExpenseForm = () => {
     // Exercise: Add add new expense to expenses context array
     const newEntry: Expense = {
       ...createEntry,
-      id: createEntry.name + 1,
+      id: `${createEntry.name}${expenses.length + 1}`,
     };
     setExpenses([...expenses, newEntry]);
   };
@@ -53,7 +53,7 @@ const AddExpenseForm = () => {
             onChange={(event) =>
               setCreateEntry({
                 ...createEntry,
-                cost: event.target.value as unknown as number,
+                cost: Number(event.target.value),
               })
             }
           ></input>
