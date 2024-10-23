@@ -107,9 +107,37 @@ describe('Budget Tracking Application',()=>{
     await waitFor(()=>{
         const deletedExpense = screen.queryByText("car");
         expect(deletedExpense).not.toBeInTheDocument();
-        const deletedCost = screen.queryByText($50);
+        const deletedCost = screen.queryByText("$50");
         expect(deletedCost).not.toBeInTheDocument();
     });
+  });
+
+  test('Budget Balance Verification', async() => {
+    render(<AppProvider><App/></AppProvider>);
+    const budget = 1000;
+    let remainingBalance = 1000;
+    let totalSpent = 0;
+    expect(screen.getByText("Budget: $1000")).toBeInTheDocument();
+    expect(screen.getByText("Remaining: $1000")).toBeInTheDocument();
+    expect(screen.getByText("Spent so far: $0")).toBeInTheDocument();
+    const nameInput = screen.getByLabelText("Name");
+    const costInput = screen.getByLabelText("Cost");
+    const saveButton = screen.getByText("Save");
+
+    fireEvent.change(costInput, {target: {value: 50}});
+    fireEvent.change(nameInput,{target: {value: "food"}});
+    fireEvent.click(saveButton);
+
+    remainingBalance = remainingBalance -50;
+    totalSpent = totalSpent + 50;
+
+    await waitFor(() => {
+      expect(screen.getByText("Remaining: $950")).toBeInTheDocument();
+      expect(screen.getByText("Spent so far: $50")).toBeInTheDocument();
+    });
+
+    expect(remainingBalance + totalSpent).toBe(budget);
+
   });
 
   test('Delete multiple', async ()=> {
