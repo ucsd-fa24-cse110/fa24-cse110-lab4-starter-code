@@ -3,7 +3,24 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import App from "./App"
 
 describe("Budget Balance Verification", () => {
-    test("checks initial budget is correct", () => {
+    test("checks initial setup is correct", () => {
+      render(<App />);
+   
+      
+      const initialBudget = screen.getByTestId('budget-value');
+      const initialBudgetVal = initialBudget.textContent;
+
+      const initialRemaining = screen.getByTestId('remaining-value');
+      const initialRemainingVal = initialRemaining.textContent;
+
+      const initialSpent = screen.getByTestId('spent-value');
+      const initialSpentVal = initialSpent.textContent;
+
+      expect(initialBudgetVal).toEqual("$5000");
+      expect(initialRemainingVal).toEqual("$5000");
+      expect(initialSpentVal).toEqual("$0");
+    });
+    test("checks ", () => {
       render(<App />);
    
       //const initialBudget = screen.getByLabelText("Budget: $")
