@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { AppContext } from '/Users/Sara/Desktop/fa24-cse110-lab4-starter-code/src/context/AppContext';
+import { AppContext } from 'C:/Users/User/Downloads/fa24-cse110-lab4-starter-code/src/context/AppContext';
 
 const AddExpenseForm = () => {
   // Exercise: Consume the AppContext here
@@ -33,7 +33,7 @@ const AddExpenseForm = () => {
             type="text"
             className="form-control"
             id="name"
-            value={""}
+            value={name}
             onChange={(e) => setName(e.target.value)}
           ></input>
         </div>
@@ -44,7 +44,7 @@ const AddExpenseForm = () => {
             type="text"
             className="form-control"
             id="cost"
-            value={0}
+            value={cost}
             onChange={(e) => setCost(parseInt(e.target.value))}
           ></input>
         </div>
