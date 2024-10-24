@@ -4,6 +4,8 @@ import App from '../App';
 import { AppProvider } from '../context/AppContext';
 import Remaining from '../components/Remaining';
 
+window.alert = jest.fn();
+
 describe('Budget Tracking Application',()=>{
   test('creates a new expense', async () =>{
     render(<AppProvider><App/></AppProvider>);
@@ -112,6 +114,22 @@ describe('Budget Tracking Application',()=>{
     });
   });
 
+  test('triggers an alert when total exceeds budget', async()=>{
+    render(<AppProvider><App/></AppProvider>)
+    const budget = 1000;
+    expect(screen.getByText("Budget: $1000")).toBeInTheDocument();
+    const nameInput = screen.getByLabelText("Name");
+    const costInput = screen.getByLabelText("Cost");
+    const saveButton = screen.getByText("Save");
+    fireEvent.change(nameInput,{target: {value: "rent"}});
+    fireEvent.change(costInput,{target: {value: 1109}});
+    fireEvent.click(saveButton);
+
+    await waitFor(() => {
+      expect(window.alert).toHaveBeenCalledWith("You have exceeded your budget!");
+    });
+  });
+
   test('Budget Balance Verification', async() => {
     render(<AppProvider><App/></AppProvider>);
     const budget = 1000;
@@ -128,7 +146,7 @@ describe('Budget Tracking Application',()=>{
     fireEvent.change(nameInput,{target: {value: "food"}});
     fireEvent.click(saveButton);
 
-    remainingBalance = remainingBalance -50;
+    remainingBalance = remainingBalance - 50;
     totalSpent = totalSpent + 50;
 
     await waitFor(() => {
