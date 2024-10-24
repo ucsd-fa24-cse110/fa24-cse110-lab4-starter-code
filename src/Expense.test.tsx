@@ -18,3 +18,28 @@ describe("Create Expense", () => {
       expect(newExpense).toBeInTheDocument();
     });
   });
+
+
+  describe("Delete Expense", () => {
+      test("create expense form and delete it", () => { // ensure that total spent and remaining update
+        render(<App />);
+
+      const nameInput = screen.getByLabelText("Name");
+      const costInput = screen.getByLabelText("Cost");
+      const saveButton = screen.getByText("Save");
+        
+      fireEvent.change(nameInput, { target: { value: "Deletable Expense" } });
+      fireEvent.change(costInput, { target: { value: "6" } });
+  
+      fireEvent.click(saveButton);
+  
+      const newExpense = screen.getByText("Deletable Expense");
+      expect(newExpense).toBeInTheDocument();
+
+      const deleteButton = screen.getAllByText("x")[0];
+      fireEvent.click(deleteButton);
+
+      expect(screen.queryByText("Deletable Expense")).not.toBeInTheDocument();
+      expect(screen.queryByText("6")).not.toBeInTheDocument();
+      })
+  })
