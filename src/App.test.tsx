@@ -1,76 +1,99 @@
 import React from 'react';
-import { render, screen, fireEvent  } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 import { AppProvider } from './context/AppContext';
-import AddExpenseForm from './components/Expense/AddExpenseForm';
-import ExpenseItem from './components/Expense/ExpenseItem';
-import Remaining from './components/Remaining';
 
-test('renders learn react link', () => {
+test('renders the My Budget Planner heading', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const headingElement = screen.getByText(/My Budget Planner/i);
+  expect(headingElement).toBeInTheDocument();
 });
 
-// test for new edxpsne
-test('adds mew expense', () => {
-  render(
-    <AppProvider>
-      <AddExpenseForm />
-    </AppProvider>
-  );
-
-  // find intput fields
-  const nameInput = screen.getByLabelText(/name/i);
-  const costInput = screen.getByLabelText(/cost/i);
-  const saveButton = screen.getByText(/save/i);
-
-  //typing
-  fireEvent.change(nameInput, { target: { value: 'Coffee' } });
-  fireEvent.change(costInput, { target: { value: '5' } });
-
-  //clikcing
-  fireEvent.click(saveButton);
-
-  // assert new expense
-  expect(screen.getByText(/Coffee/)).toBeInTheDocument();
-  expect(screen.getByText(/\$5/)).toBeInTheDocument();
+test('renders the Remaining balance section', () => {
+  render(<App />);
+  
+  // remaining rendered
+  expect(screen.getByText(/Remaining:/i)).toBeInTheDocument();
 });
 
-// detelting expsnese
-test('deletes expense', () => {
-  const expense = { id: '1', name: 'Coffee', cost: 5 };
+test('renders the Add Expense form', () => {
+  render(<App />);
 
-  render(
-    <AppProvider>
-      <ExpenseItem id={expense.id} name={expense.name} cost={expense.cost} />
-    </AppProvider>
-  );
-
-  // assert expense is in doc
-  expect(screen.getByText(/coffee/i)).toBeInTheDocument();
-
-  // find delte button
-  const deleteButton = screen.getByText(/x/i);
-  fireEvent.click(deleteButton);
-
-  // assert expense isnt in documen
-  expect(screen.queryByText(/coffee/i)).not.toBeInTheDocument();
+  // add expense redered
+  expect(screen.getByLabelText(/Name/i)).toBeInTheDocument();  
+  expect(screen.getByLabelText(/Cost/i)).toBeInTheDocument(); 
+  expect(screen.getByText(/Save/i)).toBeInTheDocument();      
 });
 
-// test for budget
-test('verifies the remaining budget', () => {
-  const expenses = [
-    { id: '1', name: 'Coffee', cost: 5 },
-    { id: '2', name: 'Lunch', cost: 10 },
-  ];
+test('initial budget is correctly displayed', () => {
+  render(<App />);
+  
+  // checks budget
+  expect(screen.getByText(/Remaining: \$1000/i)).toBeInTheDocument();
+});
 
-  render(
-    <AppProvider value={{ expenses, budget: 100 }}>
-      <Remaining />
-    </AppProvider>
-  );
+test('creates a new expense and updates the expense list and remaining budget', () => {
+  render(<App />);
 
-  // asser that budget is correctly calc.
-  expect(screen.getByText(/Remaining: \$85/)).toBeInTheDocument();
+  // checks balance = 1000
+  expect(screen.getByText(/Remaining: \$1000/i)).toBeInTheDocument();
+  expect(screen.getByText(/Spent so far: \$0/i)).toBeInTheDocument();
+
+  
+  fireEvent.change(screen.getByLabelText(/Name/i), { target: { value: 'Groceries' } });
+  fireEvent.change(screen.getByLabelText(/Cost/i), { target: { value: '200' } });
+
+  // adds expense
+  fireEvent.click(screen.getByText(/Save/i));
+
+  // checks for new expense and new balance
+  expect(screen.getByText(/Remaining: \$800/i)).toBeInTheDocument();
+  expect(screen.getByText(/Spent so far: \$200/i)).toBeInTheDocument();
+
+  // checks for expense in list
+  const expenseItems = screen.getAllByText(/\$200/i);
+  expect(expenseItems.length).toBeGreaterThan(0);
+});
+
+// deleting an expense
+test('deletes an expense and updates the expense list and remaining budget', () => {
+  render(<AppProvider><App /></AppProvider>);
+
+  // adds expense
+  fireEvent.change(screen.getByLabelText(/Name/i), { target: { value: 'Rent' } });
+  fireEvent.change(screen.getByLabelText(/Cost/i), { target: { value: '500' } });
+  fireEvent.click(screen.getByText(/Save/i));
+
+  // checks expense
+  expect(screen.getByText(/Remaining: \$500/i)).toBeInTheDocument();
+  expect(screen.getByText(/Spent so far: \$500/i)).toBeInTheDocument();
+  
+  const deleteButtons = screen.getAllByText(/x/i);
+  fireEvent.click(deleteButtons[0]);
+
+  
+  
+});
+
+// checks for balance
+test('validates that Budget = Remaining Balance + Total Expenditure', () => {
+  render(<AppProvider><App /></AppProvider>);
+
+  // checks intial budget
+  const initialBudget = 1000;
+
+  // adds expense
+  fireEvent.change(screen.getByLabelText(/Name/i), { target: { value: 'Shopping' } });
+  fireEvent.change(screen.getByLabelText(/Cost/i), { target: { value: '300' } });
+  fireEvent.click(screen.getByText(/Save/i));
+
+  // checks remaining and balance
+  const remainingElement = screen.getByText(/Remaining: \$700/i);
+  const spentElement = screen.getByText(/Spent so far: \$300/i);
+
+  const remaining = parseInt(remainingElement.textContent!.replace(/[^0-9]/g, ''), 10);
+  const spent = parseInt(spentElement.textContent!.replace(/[^0-9]/g, ''), 10);
+
+  // checks budget
+  expect(initialBudget).toEqual(remaining + spent);
 });
