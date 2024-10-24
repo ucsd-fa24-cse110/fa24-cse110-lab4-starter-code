@@ -4,8 +4,8 @@ import { AppContext } from "../context/AppContext";
 const Remaining = () => {
   const { expenses, budget } = useContext(AppContext);
 
-  const totalExpenses = expenses.reduce((total, item) => {
-    return (total = total + item.cost);
+  const totalExpenses: number = expenses.reduce((total: number, item) => {
+    return total + item.cost;
   }, 0);
 
   const alertType = totalExpenses > budget ? "alert-danger" : "alert-success";
@@ -15,11 +15,11 @@ const Remaining = () => {
     if (budget - totalExpenses < 0) {
       alert("You have exceeded your budget!");
     }
-  });
+  }, [budget, totalExpenses]);
 
   return (
     <div className={`alert ${alertType}`}>
-      <span data-testid = "remain">Remaining: ${budget - totalExpenses}</span>
+      <span data-testid = "remain">Remaining: ${budget-totalExpenses}</span>
     </div>
   );
 };

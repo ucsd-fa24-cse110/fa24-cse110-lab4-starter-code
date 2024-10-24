@@ -30,7 +30,7 @@ import { Expense } from "../../types/types";
     <form onSubmit={(event) => onSubmit(event)}>
       <div className="row">
         <div className="col-sm">
-          <label htmlFor="name" data-testid = "nameInput">Name</label>
+          <label htmlFor="name">Name</label>
           <input
             required
             type="text"
@@ -38,10 +38,11 @@ import { Expense } from "../../types/types";
             id="name"
             value = {name}
             onChange={(e) => setName(e.target.value)}
+            data-testid = "nameInput"
           ></input>
         </div>
         <div className="col-sm">
-          <label htmlFor="cost" data-testid = "costInput">Cost</label>
+          <label htmlFor="cost">Cost</label>
           <input
             required
             type="text"
@@ -49,6 +50,7 @@ import { Expense } from "../../types/types";
             id="cost"
             value = {cost}
             onChange={(e) => setCost(e.target.value)}
+            data-testid = "costInput"
           ></input>
         </div>
         <div className="col-sm">
