@@ -34,3 +34,5 @@ export const MyBudgetTracker = () => {
     </div>
   );
 };
+
+export default MyBudgetTracker;
