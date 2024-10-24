@@ -1,9 +1,9 @@
 import { useContext, useEffect } from "react";
-import { AppContext } from "../context/AppContext";
+import { AppContext } from '../context/AppContext';
 
 const Remaining = () => {
-  const { expenses } = useContext(AppContext);
-  let budget = 1000;
+  const { expenses, budget } = useContext(AppContext);
+  // let budget = 1000;
 
   const totalExpenses = expenses.reduce((total, item) => {
     return (total = total + item.cost);
@@ -18,8 +18,8 @@ const Remaining = () => {
   useEffect(() => {
   if(balance < 0){
     alert("Remaining balance is less than 0!");
+    // return;
   }
-
 }, [balance]);
 
   return (

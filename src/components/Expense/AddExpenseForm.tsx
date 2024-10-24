@@ -7,7 +7,7 @@ const AddExpenseForm = () => {
   //consume the AppContext here
 
   //Use the useContext hook to access the expenses and setExpenses from AppContext
-  const { expenses, setExpenses } = useContext(AppContext);
+  const { expenses, setExpenses, budget } = useContext(AppContext);
 
   // create name and cost to state variables
   const [name, setName] = useState("");
