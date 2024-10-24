@@ -7,7 +7,7 @@ const App = () => {
   // HINT: Wrap the MyBudgetTracker component with AppContextProvider
   return (
   <AppProvider>
-    <MyBudgetTracker />;
+    <MyBudgetTracker />
   </AppProvider>
   )
 };
