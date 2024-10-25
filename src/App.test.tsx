@@ -32,7 +32,6 @@ describe('Budget Tracker App', () => {
 
     const totalSpent = screen.getByText(/spent so far: \$1000/i);
     expect(totalSpent).toBeInTheDocument();
-
     const remainingBalance = screen.getByText(/remaining: \$0/i);
     expect(remainingBalance).toBeInTheDocument();
   });
@@ -49,16 +48,16 @@ describe('Budget Tracker App', () => {
     fireEvent.change(screen.getByLabelText(/cost/i), { target: { value: '100' } });
     fireEvent.click(screen.getByText(/save/i));
   
-    // Delete
     const groceriesElement = screen.getByText(/groceries/i);
-    const deleteButton = groceriesElement.closest('li')?.querySelector('button');
-    fireEvent.click(deleteButton);
-    
+
+      const deleteButton = groceriesElement.closest('li')?.querySelector('button');
+      if (deleteButton) {
+        fireEvent.click(deleteButton);
+      }
   
     expect(screen.queryByText(/groceries/i)).not.toBeInTheDocument();
     const remainingBalance = screen.getByText(/Remaining: \$1000/i);
     expect(remainingBalance).toBeInTheDocument();
-
   });
 
   test('budget balance equation holds', async () => {
@@ -79,13 +78,15 @@ describe('Budget Tracker App', () => {
   
     const groceriesElement = screen.getByText(/groceries/i);
     const deleteButton = groceriesElement.closest('li')?.querySelector('button');
-    fireEvent.click(deleteButton);
-    
+    if (deleteButton) {
+      fireEvent.click(deleteButton);
+    }
   
     //variables to test
     const budgetAmount = 1000;
     const totalSpent = 200; 
     const remainingBalance = 800; 
+
     const remainingAfterDeletion = await screen.findByText(/Remaining: \$800/i); // $1000 - $200
     const spentAfterDeletion = screen.getByText(/Spent so far: \$200/i);
   
