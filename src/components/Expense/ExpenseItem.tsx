@@ -18,7 +18,7 @@ const ExpenseItem = (currentExpense: Expense) => {
       <div>{currentExpense.name}</div>
       <div>${currentExpense.cost}</div>
       <div>
-        <button onClick={() => handleDeleteExpense(currentExpense)}>x</button>
+        <button aria-label={currentExpense.name} onClick={() => handleDeleteExpense(currentExpense)}>x</button>
       </div>
     </li>
   );
