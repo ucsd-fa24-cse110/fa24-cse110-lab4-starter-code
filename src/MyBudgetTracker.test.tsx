@@ -15,6 +15,28 @@ describe('Budget Tracker Functionality', () => {
 
     // Simulate adding a new expense
     fireEvent.change(screen.getByLabelText(/name/i), {target: {value: 'Skincare' } });
+    fireEvent.change(screen.getByLabelText(/cost/i), {target: {value: '1200' } });
+    fireEvent.click(screen.getByText(/save/i));
+
+    // Verify the new expense appears on the page
+    expect(screen.getByText(/Skincare/)).toBeInTheDocument();
+    expect(screen.getByText('$1200')).toBeInTheDocument(); // Specific expense entry
+
+    // Ensure the total Spent so far and Remaining update accordingly.
+    expect(screen.getByText('Spent so far: $1200')).toBeInTheDocument();
+    expect(screen.getByText('Remaining: $-200')).toBeInTheDocument();
+  });
+
+  // negative expense 
+  test('creates a new expense that leaves you in the negatives', () => {
+    render(
+      <AppProvider>
+        <MyBudgetTracker />
+      </AppProvider>
+    );
+
+    // Simulate adding a new expense
+    fireEvent.change(screen.getByLabelText(/name/i), {target: {value: 'Skincare' } });
     fireEvent.change(screen.getByLabelText(/cost/i), {target: {value: '120' } });
     fireEvent.click(screen.getByText(/save/i));
 
