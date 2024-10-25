@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
-import { AppContext } from "../../context/AppContext"; // Assuming context is located here
-import { Expense } from "../../types/types"; // Assuming Expense type is defined here
+import { AppContext } from "../../context/AppContext"; 
+import { Expense } from "../../types/types"; 
 
 const AddExpenseForm = () => {
   const { expenses, setExpenses } = useContext(AppContext);
