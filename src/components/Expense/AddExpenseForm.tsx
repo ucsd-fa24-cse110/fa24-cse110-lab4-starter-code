@@ -15,9 +15,9 @@ const AddExpenseForm = () => {
 
     // Exercise: Add add new expense to expenses context array
     const newExpense: Expense = {
-      id: Math.random().toString(36).substr(2, 9), // Generate a random id
+      id: Math.random().toString(36).substr(2, 9),
       name,
-      cost: Number(cost), // Ensure cost is a number
+      cost: Number(cost),
     }
 
     setExpenses([...expenses, newExpense]);
@@ -33,6 +33,7 @@ const AddExpenseForm = () => {
           <label htmlFor="name">Name</label>
           <input
             required
+            data-testid="name"
             type="text"
             className="form-control"
             id="name"
@@ -45,6 +46,7 @@ const AddExpenseForm = () => {
           <label htmlFor="cost">Cost</label>
           <input
             required
+            data-testid="cost"
             type="number"
             className="form-control"
             id="cost"
