@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { AppContext } from 'C:/Users/User/Downloads/fa24-cse110-lab4-starter-code/src/context/AppContext';
+import { AppContext } from '/Users/Sara/Desktop/fa24-cse110-lab4-starter-code/src/context/AppContext';
 
 const AddExpenseForm = () => {
   // Exercise: Consume the AppContext here
@@ -18,7 +18,7 @@ const AddExpenseForm = () => {
 
     setExpenses([...expenses, newExpense]);
 
-    setID('')
+    setID('');
     setName('');
     setCost(0);
   };

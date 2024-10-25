@@ -1,7 +1,6 @@
 import { Expense } from "../../types/types";
 import React, { useContext } from "react";
-import { AppContext } from 'C:/Users/User/Downloads/fa24-cse110-lab4-starter-code/src/context/AppContext';
-
+import { AppContext } from '/Users/Sara/Desktop/fa24-cse110-lab4-starter-code/src/context/AppContext';
 
 const ExpenseItem = (currentExpense: Expense) => {
   // Exercise: Consume the AppContext here
@@ -9,9 +8,12 @@ const ExpenseItem = (currentExpense: Expense) => {
 
   const handleDeleteExpense = (currentExpense: Expense) => {
     // Exercise: Remove expense from expenses context array
-    const updatedExpenses = expenses.filter((expense) => expense.id !== currentExpense.id);
-
-    setExpenses(updatedExpenses);
+    const index = expenses.findIndex((expense) => expense.id === currentExpense.id);
+    if (index !== -1) {
+      const updatedExpenses = [...expenses];
+      updatedExpenses.splice(index, 1);
+      setExpenses(updatedExpenses);
+    }
   };
 
   return (
