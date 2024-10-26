@@ -14,7 +14,7 @@ const AddExpenseForm = () => {
 
     // Exercise: Add add new expense to expenses context array
     const newExpense:Expense = {
-      id: (expenses.length + 1).toString(),
+      id: expenses.length === 0? "1" :(expenses[expenses.length-1].id + 1).toString(),
       name: name, 
       cost: cost};
 
@@ -33,6 +33,7 @@ const AddExpenseForm = () => {
             type="text"
             className="form-control"
             id="name"
+            placeholder="name"
             value={name}
             onChange = {(event) => setName(event.target.value)}
           ></input>
@@ -44,8 +45,9 @@ const AddExpenseForm = () => {
             type="text"
             className="form-control"
             id="cost"
+            placeholder="cost"
             value={cost}
-            onChange={(e)=>setCost(parseFloat(e.target.value) || 0)}
+            onChange={(event)=>setCost(parseFloat(event.target.value) || 0)}
           ></input>
         </div>
         <div className="col-sm">
