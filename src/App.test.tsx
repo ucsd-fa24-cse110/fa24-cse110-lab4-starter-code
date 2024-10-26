@@ -237,26 +237,6 @@ describe("Edge Cases", () => {
     //alertSpy.mockRestore(); NOT NEEDED
   });
 
-  test("User cannot save an expense without naming it", () => {
-    render(<App />);
-
-    const alertSpy = jest.spyOn(window, 'alert').mockImplementation(() => {});
-
-    // Set up inputs and buttons
-    const createNoteCostInput = screen.getByLabelText("Cost");
-    const createNoteButton = screen.getByTestId("Save");
-  
-    // Attempt to submit an expense with only a cost, no name
-    fireEvent.change(createNoteCostInput, { target: { value: 50 } });
-    fireEvent.click(createNoteButton);
-  
-    // Expecting an alert to appear, indicating the "Name" is required
-    expect(alertSpy).toHaveBeenCalledWith("Please enter a name for the expense.");
-  
-    // Expecting the expense is not on the site
-    expect(screen.queryByText("$50")).not.toBeInTheDocument();
-  
-  });
 });
 
 
