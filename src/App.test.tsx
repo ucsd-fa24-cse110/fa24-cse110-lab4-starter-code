@@ -223,6 +223,8 @@ describe("Budget Balance Verification", () => {
     const testCost1 = 500;
 
     const budget = 1000;
+    //Check if the orginal budget is $1000
+    expect(screen.getByText(`Budget: $${budget}`)).toBeInTheDocument();
     const newBudget = 10000;
 
     const nameInput = screen.getByPlaceholderText("name");
@@ -234,12 +236,15 @@ describe("Budget Balance Verification", () => {
     fireEvent.change(nameInput, {target: {value: testName1}});
     fireEvent.change(costInput, {target: {value: testCost1}});
     fireEvent.click(saveButton);
+
+    //Edit budget
     fireEvent.click(editButton);
     const updateInput = screen.getByPlaceholderText("budget");
     fireEvent.change(updateInput, {target: {value: newBudget}});
     const updateButton = screen.getByText("Update");
     fireEvent.click(updateButton);
 
+    //Check if the new budget is updated
     expect(screen.getByText(`Budget: $${newBudget}`)).toBeInTheDocument();
 
     //Check if remaining + spent so far === budget?
