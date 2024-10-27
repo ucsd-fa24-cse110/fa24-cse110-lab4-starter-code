@@ -11,8 +11,8 @@ import AddExpenseForm from './components/Expense/AddExpenseForm';
 // });
 
 
-describe("Testing adding new expenses", () => {
-  test("Testing the New Expense", () => {
+
+test("Testing the New Expense", () => {
     render(<App/>);
     const expenseList = screen.queryAllByTestId("expenses");
     console.log(expenseList);
@@ -29,16 +29,16 @@ describe("Testing adding new expenses", () => {
     const newName = screen.getByText("Sardines!");
     const newCost = screen.getByText("$10");
     const spendings = screen.getByTestId("SPENT").textContent;
+    const remaining = screen.getByTestId("REMAINING").textContent;
     
     expect(newName).toBeInTheDocument();
     expect(newCost).toBeInTheDocument();
     expect(spendings).toBe("Spent so far: $10");
+    expect(remaining).toBe("Remaining: $1990");
     
     const newexpenseList = screen.getAllByTestId("expenses");
     expect(newexpenseList.length).toEqual(1);
   });
-  
-});
 
 describe("delete an expense", () => {
   test("delete an expense sucessfully" , ()=> {
@@ -74,7 +74,7 @@ describe("delete an expense", () => {
   const newName = screen.queryByText("Sardines!");
   const newCost = screen.queryByText("$10");
   expect(newName).toBeNull;
-  expect(newCost).tobeNull;
+  expect(newCost).toBeNull;
 
 
   // need to add multiple expenses 
@@ -101,9 +101,8 @@ describe("delete an expense", () => {
     const newName = screen.queryByText(names[i]);
     const newCost = screen.queryByText("$"+costs[i].toString());
     expect(newName).toBeNull;
-    expect(newCost).tobeNull;
+    expect(newCost).toBeNull;
   }
-  ``
   });
 });
 
