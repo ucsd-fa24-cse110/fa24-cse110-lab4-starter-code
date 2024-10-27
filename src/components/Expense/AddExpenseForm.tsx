@@ -16,7 +16,7 @@ const AddExpenseForm = () => {
     event.preventDefault();
 
     // Exercise: Add add new expense to expenses context array
-    let new_expense:Expense = {id:"-1", name:name, cost:cost}; 
+    let new_expense:Expense = {id:app.expenses.length.toString(), name:name, cost:cost}; 
     app.setExpenses([...app.expenses,new_expense]);
 
     // to reset the form for every new submit
@@ -31,6 +31,7 @@ const AddExpenseForm = () => {
           <label htmlFor="name">Name</label>
           <input
             required
+            data-testid="NAME"
             type="text"
             className="form-control"
             id="name"
@@ -43,6 +44,7 @@ const AddExpenseForm = () => {
         <div className="col-sm">
           <label htmlFor="cost">Cost</label>
           <input
+            data-testid="COST"
             required
             type="text"
             className="form-control"
