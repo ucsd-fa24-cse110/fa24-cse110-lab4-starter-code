@@ -76,17 +76,34 @@ describe("delete an expense", () => {
   expect(newName).toBeNull;
   expect(newCost).tobeNull;
 
+
+  // need to add multiple expenses 
+  const names = ["Sardines","Coat","Van", "Spray on Shoes"];
+  const costs = [10,20,300,350];
+
+  for (let i =0; i<costs.length; i++){
+    fireEvent.change(createName, {target:{value:names[i]}});
+    fireEvent.change(createCost, {target:{value:costs[i]}});
+    fireEvent.click(saveButton);
+  }
   
   //______deleting ALL expenses______//
 
-  // const allDeleteXButtons = screen.getAllByText("x");
-  // allDeleteXButtons.forEach((deleteButton) => {
-  //   fireEvent.click(deleteButton);
-  // })
+  const allDeleteXButtons = screen.getAllByText("x");
+  allDeleteXButtons.forEach((deleteButton) => {
+    fireEvent.click(deleteButton);
+  })
  
   //create checker to validate all expenses deleted
-
+  expect(updatedExpenseList.length).toBe(0);
   
+  for (let i=0; i<costs.length; i++){
+    const newName = screen.queryByText(names[i]);
+    const newCost = screen.queryByText("$"+costs[i].toString());
+    expect(newName).toBeNull;
+    expect(newCost).tobeNull;
+  }
+  ``
   });
 });
 
@@ -107,7 +124,7 @@ describe("budget balance verification", () => {
   const initialRemainingValue = Number(initialRemaining?.replace("Remaining: $", "") || 0);
   const initialSpentValue = Number(initialSpent?.replace("Spent so far: $", "") || 0);
 
-  // Initial Verification Equation Check
+  // Initial Base Verification Equation Check
   const sum = Number(initialRemainingValue) + Number(initialSpentValue); 
   expect(initialBudgetValue).toEqual(sum);
 
@@ -140,7 +157,7 @@ describe("budget balance verification", () => {
 
   // _____________ Check if equation remains true after DELETION  _____________  // 
   
-  // deletion process 
+  // deletion process
   const deleteXButton = screen.getAllByText("x")[0];
   fireEvent.click(deleteXButton);
   const updatedExpenseList = screen.queryAllByTestId("expenses");
@@ -155,7 +172,6 @@ describe("budget balance verification", () => {
 
   // Equation Check: is Remaining Value + Spent Value == Budget 
   expect(initialBudgetValue).toEqual(remainingAfterDeletionValue + spentAfterDeletionValue);
-
   });
 });
   
