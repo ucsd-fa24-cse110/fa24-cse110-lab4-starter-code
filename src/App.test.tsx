@@ -76,7 +76,7 @@ test('deletes an expense and updates the expense list and remaining budget', () 
 });
 
 // checks for balance
-test('validates that Budget = Remaining Balance + Total Expenditure', () => {
+test('toBe', () => {
   render(<AppProvider><App /></AppProvider>);
 
   // checks intial budget
