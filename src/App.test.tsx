@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 import { AppProvider } from './context/AppContext';
 
-test('renders the My Budget Planner heading', () => {
+test('toBe', () => {
   render(<App />);
   const headingElement = screen.getByText(/My Budget Planner/i);
   expect(headingElement).toBeInTheDocument();
