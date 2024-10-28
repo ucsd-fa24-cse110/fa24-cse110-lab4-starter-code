@@ -5,5 +5,6 @@ import App from './App';
 test('renders My Budget Planner title', () => {
   render(<App />);
   const titleElement = screen.getByText(/My Budget Planner/i);
-  expect(titleElement).toBeInTheDocument();
+  const expenseID = screen.getByText(/App Provider/);
+  expect(expenseID).toBeInTheDocument();
 });
