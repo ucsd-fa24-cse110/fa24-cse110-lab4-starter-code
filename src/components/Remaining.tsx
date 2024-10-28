@@ -2,29 +2,27 @@ import { useContext, useEffect } from "react";
 import { AppContext } from "../context/AppContext";
 
 const Remaining = () => {
-  const { expenses } = useContext(AppContext);
-  let budget = 1000;
+  const { expenses, budget } = useContext(AppContext);
 
-  const totalExpenses = expenses.reduce((total, item) => {
-    return (total = total + item.cost);
-  }, 0);
+  const totalExpenses = expenses.reduce((total, item) => total + item.cost, 0);
+  const remaining = budget - totalExpenses;
 
-  const remaning = budget - totalExpenses;
+  const alertType = remaining < 0 ? "alert-danger" : "alert-success";
 
-  const alertType = totalExpenses > budget ? "alert-danger" : "alert-success";
-
-  // Exercise: Create an alert when Remaining is less than 0.
-  useEffect (() => {
-    if (remaning < 0) {
+  // Show an alert when remaining balance is less than 0
+  useEffect(() => {
+    if (remaining < 0) {
       alert("You have exceeded your budget!");
     }
-  }, [remaning]);
+  }, [remaining]);
 
   return (
     <div className={`alert ${alertType}`}>
-      {remaning < 0 ? (<span>You have exceeded your budget!</span>) : (<span>Now Remaining: ${remaning}</span>)}
-      
-      
+      {remaining < 0 ? (
+        <span>You have exceeded your budget!</span>
+      ) : (
+        <span>Remaining: ${remaining}</span>
+      )}
     </div>
   );
 };
