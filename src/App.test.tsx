@@ -6,7 +6,7 @@ describe('MyBudgetTracker', () => {
     render(<App/>);
     
     const budget = screen.getByText('Budget: 1000');
-    expect(budget).not.toBeInTheDocument();
+    expect(budget).toBeInTheDocument();
 
     const remaining = screen.getByText('Remaining: $1000');
     expect(remaining).toBeInTheDocument();
