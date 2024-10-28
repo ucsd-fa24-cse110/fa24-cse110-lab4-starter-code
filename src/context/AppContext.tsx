@@ -11,6 +11,8 @@ interface AppContextType {
 const initialState: AppContextType = {
   expenses: [],
   setExpenses: () => {},
+ 
+
 };
 
 export const AppContext = createContext<AppContextType>(initialState);
