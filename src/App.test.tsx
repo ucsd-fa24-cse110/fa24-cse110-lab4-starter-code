@@ -14,7 +14,7 @@ describe('App Component', () => {
 
   test('renders Budget component', () => {
     const budgetElement = screen.getByText(/Budget:/i);
-    expect(budgetElement).toBeInTheDocument();
+    expect(budgetElementsssss).toBeInTheDocument();
   });
 
   test('renders Remaining component', () => {
