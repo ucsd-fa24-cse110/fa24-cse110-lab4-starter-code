@@ -6,7 +6,7 @@ import Remaining from '../components/Remaining';
 
 window.alert = jest.fn();
 
-describe('Budget Tracking Application',()=>{
+describe('toBe',()=>{
   test('creates a new expense', async () =>{
     render(<AppProvider><App/></AppProvider>);
     //checking to see if the screen properly displays the Remaining: $1000 initally
