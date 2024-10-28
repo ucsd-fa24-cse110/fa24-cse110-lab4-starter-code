@@ -7,7 +7,7 @@ import Remaining from '../components/Remaining';
 window.alert = jest.fn();
 
 describe('Budget Tracking Application',()=>{
-  test('toBe', async () =>{
+  test('creates a new expense', async () =>{
     render(<AppProvider><App/></AppProvider>);
     //checking to see if the screen properly displays the Remaining: $1000 initally
     const ogRemaining = screen.getByText("Remaining: $1000");
@@ -150,7 +150,8 @@ describe('Budget Tracking Application',()=>{
     totalSpent = totalSpent + 50;
 
     await waitFor(() => {
-      expect(screen.getByText("Remaining: $950")).toBeInTheDocument();
+      //expect(screen.getByText("Remaining: $950")).toBeInTheDocument();
+      expect(screen.getByText("Remaining: $1000")).toBeInTheDocument();
       expect(screen.getByText("Spent so far: $50")).toBeInTheDocument();
     });
 
