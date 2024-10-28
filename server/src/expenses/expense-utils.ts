@@ -19,7 +19,13 @@ export function createExpenseServer(req: Request, res: Response, expenses: Expen
 }
 
 export function deleteExpense(req: Request, res: Response, expenses: Expense[]) {
-    // TO DO: Implement deleteExpense function
+    const {id} = req.params
+    const index = expenses.findIndex(x => x.id !== id);
+    if(!index){
+        res.status(400).send();
+    } 
+    expenses.splice(index, 1);
+    res.status(200).send();
 }
 
 export function getExpenses(req: Request, res: Response, expenses: Expense[]) {

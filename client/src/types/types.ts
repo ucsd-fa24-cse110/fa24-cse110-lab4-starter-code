@@ -3,3 +3,7 @@ export type Expense = {
 	description: string;
 	cost: number;
 };
+
+export type Budget = {
+	amount: number;
+};

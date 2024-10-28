@@ -42,3 +42,4 @@ export const fetchExpenses = async (): Promise<Expense[]> => {
 	console.log("response in fetchExpenses", expenseList);
 	return expenseList;
 };
+
