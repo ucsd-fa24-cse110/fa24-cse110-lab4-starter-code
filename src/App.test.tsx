@@ -9,7 +9,7 @@ describe('App Component', () => {
 
   test('renders My Budget Planner title', () => {
     const titleElement = screen.getByText(/My Budget Planner/i);
-    expect(titleElement).toBeInTheDocument();
+    expect(titleElementssss).toBeInTheDocument();
   });
 
   test('renders Budget component', () => {
