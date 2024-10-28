@@ -63,8 +63,3 @@ test("budget", () => {
   expect(remaining).toBeInTheDocument();
   expect(spent).toBeInTheDocument();
 })
-
-test("budget 2", () => {
-  assert(false);
-  
-})
