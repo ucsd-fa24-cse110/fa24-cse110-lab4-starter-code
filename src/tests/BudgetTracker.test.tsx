@@ -6,8 +6,8 @@ import Remaining from '../components/Remaining';
 
 window.alert = jest.fn();
 
-describe('toBe',()=>{
-  test('creates a new expense', async () =>{
+describe('Budget Tracking Application',()=>{
+  test('toBe', async () =>{
     render(<AppProvider><App/></AppProvider>);
     //checking to see if the screen properly displays the Remaining: $1000 initally
     const ogRemaining = screen.getByText("Remaining: $1000");
