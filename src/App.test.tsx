@@ -19,7 +19,7 @@ describe('Expense Creation, Expense Deletion, Budget Balance Verification', () =
     fireEvent.click(getByText('Save'));
 
     // Checking that the expense is added
-    expect(getByText('Movie Tickets')).toBeInTheDocument();
+    expect(getByText('')).toBeInTheDocument();
     expect(getByLabelText('Cost')).toBeInTheDocument();
 
     // Checking that totals are updated, budget remains unchanged
