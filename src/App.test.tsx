@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react';
 import App from './App';
 import { AppProvider } from './context/AppContext';
 
-test('toBe', () => {
+test('renders the My Budget Planner heading', () => {
   render(<App />);
   const headingElement = screen.getByText(/My Budget Planner/i);
   expect(headingElement).toBeInTheDocument();
@@ -76,7 +76,7 @@ test('deletes an expense and updates the expense list and remaining budget', () 
 });
 
 // checks for balance
-test('toBe', () => {
+test('validates that Budget = Remaining Balance + Total Expenditure', () => {
   render(<AppProvider><App /></AppProvider>);
 
   // checks intial budget
