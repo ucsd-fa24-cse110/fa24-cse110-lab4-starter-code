@@ -1,9 +1,13 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
 import App from './App';
+import { AppProvider } from './context/AppContext';
+import { render, screen, act } from '@testing-library/react';
+
+
 
 test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
+  render(<AppProvider><App/></AppProvider>);
+  const linkElement = screen.getByText(/My Broken LInk/i);
   expect(linkElement).toBeInTheDocument();
+  //expect("something").toBeInTheDocument();
 });
