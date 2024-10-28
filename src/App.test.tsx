@@ -216,7 +216,7 @@ describe("Edge Cases", () => {
     //Verifies that the expenses show up correctly
     const noteTitleEX1 = screen.getByText("Expense 1");
     const noteCost1K = screen.getByText("$1000");
-    expect(noteTitleEX1).toBeInTheDocument();
+    expect(noteTitleEX1).not.toBeInTheDocument(); // Should be wrong
     expect(noteCost1K).toBeInTheDocument();
 
     // Second expense, $1
