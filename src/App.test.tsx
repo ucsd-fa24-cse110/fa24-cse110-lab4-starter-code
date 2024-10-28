@@ -1,6 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
+import assert from 'assert';
 
 test("add expense", () => {
   render(<App />);
