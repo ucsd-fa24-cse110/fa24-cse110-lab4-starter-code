@@ -1,6 +1,7 @@
 import React from 'react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import App from './App';
+import assert from 'assert';
 
 test("add expense", () => {
   render(<App />);
@@ -61,4 +62,8 @@ test("budget", () => {
   expect(budget).toBeInTheDocument();
   expect(remaining).toBeInTheDocument();
   expect(spent).toBeInTheDocument();
+})
+
+test("budget 2", () => {
+  assert(false);
 })
