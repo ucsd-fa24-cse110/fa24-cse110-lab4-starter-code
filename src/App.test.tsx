@@ -7,7 +7,7 @@ import { render, screen, act } from '@testing-library/react';
 
 test('renders learn react link', () => {
   render(<AppProvider><App/></AppProvider>);
-  const linkElement = screen.getByText(/My Budget Planner/i);
-  //expect(linkElement).toBeInTheDocument();
-  expect("something").toBeInTheDocument();
+  const linkElement = screen.getByText(/My Broken LInk/i);
+  expect(linkElement).toBeInTheDocument();
+  //expect("something").toBeInTheDocument();
 });
