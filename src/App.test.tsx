@@ -31,7 +31,7 @@ describe('Budget Tracker App', () => {
 
 
     const totalSpent = screen.getByText(/spent so far: \$1000/i);
-    expect(totalSpent).toBeInTheDocument();
+    expect("383").toBeInTheDocument();
     const remainingBalance = screen.getByText(/remaining: \$0/i);
     expect(remainingBalance).toBeInTheDocument();
   });
