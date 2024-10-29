@@ -1,22 +1,33 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 
 const Remaining = () => {
-  const { expenses } = useContext(AppContext);
-  let budget = 1000;
+  const { expenses, budget } = useContext(AppContext); // Access budget from context
+  const [alertMessage, setAlertMessage] = useState<string | null>(null);
 
-  const totalExpenses = expenses.reduce((total, item) => {
-    return (total = total + item.cost);
-  }, 0);
+  const totalExpenses = expenses.reduce((total, item) => total + item.cost, 0);
+  const remainingBalance = budget - totalExpenses;
+  const alertType = remainingBalance < 0 ? "alert-danger" : "alert-success";
 
-  const alertType = totalExpenses > budget ? "alert-danger" : "alert-success";
-
-  // Exercise: Create an alert when Remaining is less than 0.
+  useEffect(() => {
+    if (remainingBalance < 0) {
+      setAlertMessage("Warning: You have exceeded your budget!");
+    } else {
+      setAlertMessage(null);
+    }
+  }, [remainingBalance]);
 
   return (
-    <div className={`alert ${alertType}`}>
-      <span>Remaining: ${budget - totalExpenses}</span>
-    </div>
+    <>
+      <div className={`alert ${alertType}`}>
+        <span>Remaining: ${remainingBalance}</span>
+      </div>
+      {alertMessage && (
+        <div className="alert alert-warning mt-2">
+          <span>{alertMessage}</span>
+        </div>
+      )}
+    </>
   );
 };
 
