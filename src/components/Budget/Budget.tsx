@@ -16,7 +16,7 @@ const Budget = () => {
   };
 
   const handleCancelClick = () => {
-    setNewBudget(budget); // Revert to the original budget
+    setNewBudget(budget);
     setIsEditing(false);
   };
 
@@ -29,7 +29,7 @@ const Budget = () => {
             className="form-control"
             value={newBudget}
             onChange={(e) => setNewBudget(Number(e.target.value))}
-            style={{ maxWidth: "50px" }}
+            style={{ maxWidth: "200px" }}
           />
           <button className="btn btn-primary ml-2" onClick={handleSaveClick}>
             Save
