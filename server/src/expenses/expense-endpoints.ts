@@ -11,8 +11,8 @@ export function createExpenseEndpoints(app: any, expenses: any) {
 
     // Delete an expense
     app.delete("/expenses/:id", (req: Request, res: Response) => {
-
-        deleteExpense(req, res, expenses);
+        const id = req.params.id;
+        deleteExpense(req, res, expenses, id);
 
     });
 

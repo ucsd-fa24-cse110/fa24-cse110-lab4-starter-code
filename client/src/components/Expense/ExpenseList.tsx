@@ -10,17 +10,17 @@ const ExpenseList = () => {
   // Fetch expenses on component mount
   useEffect(() => {
     loadExpenses();
-    });
+  }, []);
   
-    // Function to load expenses and handle errors
-    const loadExpenses = async () => {
-    try {
-      const expenseList = await fetchExpenses();
-      setExpenses(expenseList);
-    } catch (err: any) {
-      console.log(err.message);
-    }
-    };
+  // Function to load expenses and handle errors
+  const loadExpenses = async () => {
+  try {
+    const expenseList = await fetchExpenses();
+    setExpenses(expenseList);
+  } catch (err: any) {
+    console.log(err.message);
+  }
+  };
 
   return (
     <ul className="list-group">
