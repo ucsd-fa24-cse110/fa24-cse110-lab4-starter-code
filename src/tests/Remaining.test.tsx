@@ -41,6 +41,6 @@ describe("Budget Balance Verification", () => {
     const totalSpent = 300; // 200 for groceries + 100 for electricity
     const remaining = 700;
     const budget = 1000;
-    expect(budget).toBe(totalSpent + remaining);
+    expect(budget).toBe(totalSpent + remaining +100);
   });
 });
