@@ -31,7 +31,7 @@ describe('Budget Tracker App', () => {
 
 
     const totalSpent = screen.getByText(/spent so far: \$1000/i);
-    expect("383").toBeInTheDocument();
+    expect(totalSpent).toBeInTheDocument();
     const remainingBalance = screen.getByText(/remaining: \$0/i);
     expect(remainingBalance).toBeInTheDocument();
   });
@@ -105,7 +105,7 @@ describe('Budget Tracker App', () => {
     );
 
     fireEvent.change(screen.getByLabelText(/name/i), { target: { value: 'New Car' } });
-    fireEvent.change(screen.getByLabelText(/cost/i), { target: { value: '200' } }); //wrong test
+    fireEvent.change(screen.getByLabelText(/cost/i), { target: { value: '1100' } });
     fireEvent.click(screen.getByText(/save/i));
 
     // alert
