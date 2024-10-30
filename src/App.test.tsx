@@ -105,7 +105,7 @@ describe('Budget Tracker App', () => {
     );
 
     fireEvent.change(screen.getByLabelText(/name/i), { target: { value: 'New Car' } });
-    fireEvent.change(screen.getByLabelText(/cost/i), { target: { value: '1100' } });
+    fireEvent.change(screen.getByLabelText(/cost/i), { target: { value: '200' } }); //wrong test
     fireEvent.click(screen.getByText(/save/i));
 
     // alert
