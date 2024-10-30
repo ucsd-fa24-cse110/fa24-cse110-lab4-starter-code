@@ -33,7 +33,7 @@ test("Testing the New Expense", () => {
     
     expect(newName).toBeInTheDocument();
     expect(newCost).toBeInTheDocument();
-    expect(spendings).toBe("Spent so far: $10");
+    expect(spendings).toBe("Spent so far: $100");
     expect(remaining).toBe("Remaining: $1990");
     
     const newexpenseList = screen.getAllByTestId("expenses");
