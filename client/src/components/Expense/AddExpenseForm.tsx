@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import { Expense } from "../../types/types";
+import { createExpense } from "../../utils/expense-utils";
 
 
 const AddExpenseForm = () => {
@@ -14,9 +15,9 @@ const AddExpenseForm = () => {
   
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
     // Exercise: Add add new expense to expenses context array
     let new_expense:Expense = {id:app.expenses.length.toString(), name:name, cost:cost}; 
+    createExpense(new_expense); //maybe like this?
     app.setExpenses([...app.expenses,new_expense]);
 
     // to reset the form for every new submit

@@ -4,6 +4,7 @@ import { Expense } from "../types/types";
 // Exercise: Create add budget to the context
 
 interface AppContextType {
+  map(arg0: (expense: Expense) => import("react").JSX.Element): import("react").ReactNode;
   budget: number;
   setBudget:  React.Dispatch<React.SetStateAction<number>>;
   expenses: Expense[];
