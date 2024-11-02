@@ -13,6 +13,7 @@ const ExpenseItem = (currentExpense: Expense) => {
     const newExpenses = expenses.filter(
       (expense) => expense.id !== currentExpense.id 
     );
+    console.log("deleting expense with the id" + currentExpense.id);
     deleteExpense(currentExpense.id);
     setExpenses(newExpenses);
     console.log("new Expenses" + newExpenses);

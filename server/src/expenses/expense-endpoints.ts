@@ -4,6 +4,7 @@ import { Request, Response } from 'express';
 export function createExpenseEndpoints(app: any, expenses: any) {
     // Create a new expense
     app.post("/expenses", (req: Request, res: Response) => {
+        console.log("hit backend create expense");
         console.log(req)
         createExpenseServer(req, res, expenses);
 
@@ -11,8 +12,8 @@ export function createExpenseEndpoints(app: any, expenses: any) {
 
     // Delete an expense
     app.delete("/expenses/:id", (req: Request, res: Response) => {
-
-        deleteExpense(req, res, expenses);
+        console.log ("hit backend delete expenses");
+        deleteExpense(req.params.id.toString(), res, expenses);
 
     });
 
