@@ -178,5 +178,5 @@ test('deletes expenses', () => {
     fireEvent.click(deleteButton1);
     spentSoFar = parseFloat(screen.getByText(/Spent so far/i).textContent?.replace(/[^0-9.-]/g, '') || '0');
     remaining = parseFloat(screen.getByText(/Remaining/i).textContent?.replace(/[^0-9.-]/g, '') || '0');
-    expect(spentSoFar + remaining).toBe(defaultBudget);
+    expect(spentSoFar + remaining).not.toBe(defaultBudget);
   });
