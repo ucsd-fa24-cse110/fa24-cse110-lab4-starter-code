@@ -5,7 +5,6 @@ const Remaining = () => {
   const { expenses, budget } = useContext(AppContext);
 
   const totalExpenses = expenses.reduce((total, item) => {
-    console.log(total);
     return (total = total + item.cost);
   }, 0);
 
