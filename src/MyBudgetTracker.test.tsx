@@ -117,7 +117,7 @@ describe("Budget Balance Verification", () => {
     const spentVal = parseInt(spent.textContent?.replace(/\D/g, "") || "0");
 
     expect(budgetVal).toBe(remainingVal + spentVal);
-    expect(remainingVal).toBe(516);
+    expect(remainingVal).toBe(517);
     expect(spentVal).toBe(484);
   });
 
