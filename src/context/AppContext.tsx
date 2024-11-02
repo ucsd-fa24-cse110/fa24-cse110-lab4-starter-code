@@ -3,7 +3,6 @@ import { Expense } from "../types/types";
 
 // Exercise: Create add budget to the context
 
-
 //Define the shape of our context
 interface AppContextType {
   expenses: Expense[];
