@@ -35,7 +35,7 @@ describe("View Budget", () => {
       </MockProvider>
     );
     
-    expect(screen.getByText("Budget: $1000")).toBeInTheDocument();
+    expect(screen.getByText("Buget: $1000")).toBeInTheDocument();
     expect(screen.getByText("Edit")).toBeInTheDocument();
   });
 });
