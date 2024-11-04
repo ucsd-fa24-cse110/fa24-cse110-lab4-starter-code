@@ -17,6 +17,7 @@ export function createExpenseServer(req: Request, res: Response, expenses: Expen
 
     expenses.push(newExpense);
     res.status(201).send(newExpense);
+    
 }
 
 export function deleteExpense(id: string, res: Response, expenses: Expense[]) {

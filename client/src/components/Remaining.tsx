@@ -8,7 +8,7 @@ const Remaining = () => {
     return (total = total + item.cost);
   }, 0);
 
-  const alertType = totalExpenses > budget ? "alert-danger" : "alert-success";
+  const alertType = totalExpenses > budget.amount ? "alert-danger" : "alert-success";
   
 
   // Exercise: Create an alert when Remaining is less than 0.
@@ -20,7 +20,7 @@ const Remaining = () => {
 
   return (
     <div className={`alert ${alertType}`}>
-      <span>Remaining: ${budget - totalExpenses}</span>
+      <span>Remaining: ${budget.amount - totalExpenses}</span>
     </div>
   );
 };
