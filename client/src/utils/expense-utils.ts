@@ -20,10 +20,15 @@ export const createExpense = async (expense: Expense): Promise<Expense> => {
 export const deleteExpense = async (id: string): Promise<void> => {
 	const response = await fetch(`${API_BASE_URL}/expenses/${id}`, {
     	method: "DELETE",
+		headers: {
+        	"Content-Type": "application/json",
+    	},
+		body: JSON.stringify({id}),
 	});
 	if (!response.ok) {
     	throw new Error("Failed to delete expense");
 	}
+	return response.json();
 };
 
 // Function to get all expenses from the backend. Method: GET
@@ -41,4 +46,5 @@ export const fetchExpenses = async (): Promise<Expense[]> => {
 
 	console.log("response in fetchExpenses", expenseList);
 	return expenseList;
+
 };	

@@ -2,11 +2,12 @@ import { Expense } from "../../types/types";
 import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 import exp from "constants";
+import { deleteExpense } from "../../utils/expense-utils";
 
 const ExpenseItem = (currentExpense: Expense) => {
   // Exercise: Consume the AppContext here
   const app = useContext(AppContext);
-
+  
   // const handleDeleteExpense = (currentExpense: Expense) => {
   //   // Exercise: Remove expense from expenses context array
   //   app.setExpenses(app.expenses.filter((exp) => exp !== currentExpense));
@@ -14,7 +15,8 @@ const ExpenseItem = (currentExpense: Expense) => {
 
   const handleDeleteExpense = (id: string) => {
     // Exercise: Remove expense from expenses context array
-    app.setExpenses(app.expenses.filter((Expense) => Expense.id !== id));
+    deleteExpense(id);
+    app.setExpenses(app.expenses.filter((Expense) => Expense.id != id));
   };
 
   return (
