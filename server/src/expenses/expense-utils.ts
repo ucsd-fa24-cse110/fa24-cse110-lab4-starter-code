@@ -29,17 +29,13 @@ export function deleteExpense(
 ) {
   const { id } = req.params;
 
-  // Find the index of the expense with the given ID
   const index = expenses.findIndex((expense) => expense.id === id);
 
   if (index !== -1) {
-    // Remove the expense from the array
     expenses.splice(index, 1);
 
-    // Send a response indicating successful deletion
     res.status(200).json({ message: "Expense deleted successfully" });
   } else {
-    // If no expense with the given ID is found, send a 404 error
     res.status(404).json({ error: "Expense not found" });
   }
 }
