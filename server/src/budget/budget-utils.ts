@@ -15,4 +15,6 @@ export function updateBudget(res: Response, body: any, budget: { amount: number 
 
     budget.amount = body.amount;
 
+    res.status(200).send({ "data": budget });
+
 }   
