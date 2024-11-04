@@ -47,5 +47,9 @@
     "@testing-library/react": "^16.0.1",
     "@types/uuid": "^10.0.0",
     "jest": "^27.5.1"
+  },
+  "jest": {
+    "roots": ["<rootDir>/client/src"],
+    "testMatch": ["<rootDir>/client/src/**/*.test.tsx"]
   }
 }
