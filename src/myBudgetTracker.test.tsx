@@ -221,6 +221,6 @@ test("Negative remaining", () => {
   const spent = screen.getByTestId("spent");
 
   expect(remaining).toHaveTextContent("-500");
-  expect(spet).toHaveTextContent("150");
+  expect(spent).toHaveTextContent("150");
 
 });
