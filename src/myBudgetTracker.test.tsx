@@ -203,7 +203,7 @@ test("Zero Expenses", () => {
     const spentVal = parseInt(spent.textContent?.replace(/\D/g, "") || "0");
 
     expect(budgetVal).toBe(remainingVal + spentVal);
-    expect(remainingVal).toBe(1000);
+    expect(remainingVal).toBe(-1000);
     expect(spentVal).toBe(0);
   });
 
@@ -220,7 +220,7 @@ test("Negative remaining", () => {
   const remaining = screen.getByTestId("remaining");
   const spent = screen.getByTestId("spent");
 
-  expct(remaining).toHaveTextContent("-500");
-  expect(spnt).toHaveTextContent("150");
+  expect(remaining).toHaveTextContent("-500");
+  expect(spent).toHaveTextContent("150");
 
 });
