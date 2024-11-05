@@ -203,7 +203,7 @@ test("Zero Expenses", () => {
     const spentVal = parseInt(spent.textContent?.replace(/\D/g, "") || "0");
 
     expect(budgetVal).toBe(remainingVal + spentVal);
-    expect(remainingVal).toBe(-1000);
+    expect(remainingVal).toBe(100000);
     expect(spentVal).toBe(0);
   });
 
