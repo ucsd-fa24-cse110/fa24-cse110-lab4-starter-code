@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "/Users/sammyhernandez/Documents/cse110/fa24-cse110-lab4-starter-code/client/src/constants/ constants";
+import { API_BASE_URL } from "../constants/_constants";
 
 // Function to get budget from the backend. Method: GET
 export const fetchBudget = async (): Promise<number> => {

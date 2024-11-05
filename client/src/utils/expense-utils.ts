@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../constants/ constants";
+import { API_BASE_URL } from "../constants/_constants";
 import { Expense } from "../types/types";
 
 // Function to create an expense in the backend. Method: POST

@@ -3,13 +3,13 @@ import { render, fireEvent, queryByRole } from '@testing-library/react';
 import ExpenseItem from './ExpenseItem';
 import Remaining from '../Remaining';
 import ExpenseTotal from './ExpenseTotal';
-import { AppContext } from '../../context/AppContext';
+import { AppContext } from './../../context/AppContext';
 import ExpenseList from './ExpenseList';
 
 
 describe('ExpenseItem Component', () => {
   test('deletes an expense and updates the context', () => {
-    const expenseToDelete = { id: '1', name: 'Junk Food', cost: 500 };
+    const expenseToDelete = { id: '1', description: 'Junk Food', cost: 500 };
     const initialExpenses = [expenseToDelete];
     const budget = 1000;
 
@@ -27,8 +27,6 @@ describe('ExpenseItem Component', () => {
     };
 
     const { getByText, queryAllByRole, queryByText } = render(<Wrapper />);
-
-    console.log(ExpenseList);
 
     const instialRemaining = getByText('Remaining: $500')
     const instialSpent = getByText('Spent so far: $500')

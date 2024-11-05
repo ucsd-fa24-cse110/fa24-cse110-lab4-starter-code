@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { AppContext } from "../../context/AppContext";
 
 
-const ExpenseItem = ({ id, name, cost }: Expense) => {
+const ExpenseItem = ({ id, description, cost }: Expense) => {
   // Exercise: Consume the AppContext here
   const { expenses, setExpenses } = useContext(AppContext);
 
@@ -15,7 +15,7 @@ const ExpenseItem = ({ id, name, cost }: Expense) => {
 
   return (
     <li className="list-group-item d-flex justify-content-between align-items-center">
-      <div>{name}</div>
+      <div>{description}</div>
       <div>${cost}</div>
       <div>
         <button onClick={() => handleDeleteExpense()}>x</button>
