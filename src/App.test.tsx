@@ -5,5 +5,5 @@ import App from './App';
 test('renders My Budget Planner heading', () => {
   render(<App />);
   const headingElement = screen.getByText(/My Budget Planner/i); // Match heading text
-  expect(headingElement).toBeInTheDocument();
+  expect(headingElement).toBeUndefined();
 });
