@@ -50,6 +50,7 @@
 
 import React, { useState, useContext } from "react";
 import { AppContext } from "../../context/AppContext"; // Import the AppContext
+import { createExpense } from "../../utils/expense-utils";
 
 const AddExpenseForm = () => {
   // Consume the AppContext
@@ -60,23 +61,53 @@ const AddExpenseForm = () => {
   const [cost, setCost] = useState("");
 
   // Handle form submission
-  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  // const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  //   event.preventDefault();
+
+  //   // Create new expense object
+  //   const newExpense = {
+  //     id: Math.random().toString(36).substr(2, 9), // Generate a random ID
+  //     description: name,
+  //     cost: parseFloat(cost), // Ensure cost is a number
+  //   };
+
+  //   // Add new expense to the expenses array
+  //   setExpenses([...expenses, newExpense]);
+
+  //   // Clear the form after submission
+  //   setName("");
+  //   setCost("");
+  // };
+
+  const onSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
+  
     // Create new expense object
+    const maxId = expenses.length > 0 ? Math.max(...expenses.map((expense) => parseInt(expense.id))) : 0;
+
     const newExpense = {
-      id: Math.random().toString(36).substr(2, 9), // Generate a random ID
-      name: name,
-      cost: parseFloat(cost), // Ensure cost is a number
+      // id: Math.random().toString(36).substr(2, 9),
+      // id: (expenses.length + 1).toString(),
+      id: (maxId + 1).toString(),
+      description: name,
+      cost: parseFloat(cost),
     };
-
-    // Add new expense to the expenses array
-    setExpenses([...expenses, newExpense]);
-
-    // Clear the form after submission
-    setName("");
-    setCost("");
+  
+    try {
+      // Send new expense to the backend
+      const savedExpense = await createExpense(newExpense);
+  
+      // Add new expense to the expenses array in context
+      setExpenses([...expenses, savedExpense]);
+  
+      // Clear the form after submission
+      setName("");
+      setCost("");
+    } catch (error) {
+      console.error("Failed to create expense:", error);
+    }
   };
+  
 
   return (
     <form onSubmit={onSubmit}>
