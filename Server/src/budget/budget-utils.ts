@@ -9,16 +9,11 @@ export function getBudget(res: Response, budget: number) {
 export function updateBudget(res: Response, body: any, budget: { amount: number }) {
     // TO DO: Implement updateBudget function
 
-    const { amount } = body;
+    const { budget: newBudget } = body;
 
-    if (amount == null) {
-        return res.status(400).send({ error: "Missing required field: amount" });
-    }
+    // Update the budget amount
+    budget.amount = newBudget;
 
-    // Update the budget value
-    budget.amount = amount;
-
-    // Send the updated budget as the response
-    res.status(200).send({ message: "Budget updated successfully", budget: budget.amount });
-
+    // Send back the updated budget
+    res.status(200).send({ budget: budget.amount });
 }

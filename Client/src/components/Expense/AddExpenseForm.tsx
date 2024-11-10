@@ -4,9 +4,11 @@ import { Expense } from "../../types/types";
 import { createExpense } from "../../utils/expense-utils";
 
 const AddExpenseForm = () => {
+  // Exercise: Consume the AppContext here
+  const {expenses, setExpenses} = useContext(AppContext)
 
   // Exercise: Create name and cost to state variables
-  const [description, setName] = useState("");
+  const [description, setDescription] = useState("");
   const [cost, setCost] = useState<number | string>("");
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -18,16 +20,13 @@ const AddExpenseForm = () => {
       description,
       cost: Number(cost),
     }
-
-    createExpense(newExpense)
+    
+    createExpense(newExpense);
     setExpenses([...expenses, newExpense]);
 
-    setName("")
+    setDescription("")
     setCost("")
   };
-
-  // Exercise: Consume the AppContext here
-  const {expenses, setExpenses} = useContext(AppContext)
 
   return (
     <form onSubmit={(event) => onSubmit(event)}>
@@ -42,7 +41,7 @@ const AddExpenseForm = () => {
             id="name"
             value={description}
             // HINT: onChange={}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => setDescription(e.target.value)}
           ></input>
         </div>
         <div className="col-sm">

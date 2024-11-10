@@ -1,6 +1,6 @@
 import { AppContext } from "../../context/AppContext";
-import { useContext, useState, useEffect } from "react";
-import { fetchBudget } from "../../utils/budget-utils";
+import { useContext, useState } from "react";
+import { updateBudget } from "../../utils/budget-utils";
 
 const Budget = () => {
   const { budget, setBudget } = useContext(AppContext);
@@ -9,18 +9,9 @@ const Budget = () => {
   // Update the budget in context
   const handleUpdateBudget = (e: React.FormEvent) => {
     e.preventDefault();
-    setBudget(newBudget);
+    setBudget(newBudget)
+    updateBudget(newBudget)
   };
-
-  useEffect(() => {
-    const getBudget = async () => {
-        const fetchedBudget = await fetchBudget();
-        setBudget(fetchedBudget);
-        setNewBudget(fetchedBudget);
-    };
-
-    getBudget();
-}, [setBudget]);
 
   return (
     <div className="alert alert-secondary p-3 d-flex align-items-center justify-content-between">
