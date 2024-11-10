@@ -21,7 +21,6 @@ export const deleteExpense = async (id: string): Promise<void> => {
 	const response = await fetch(`${API_BASE_URL}/expenses/${id}`, {
     	method: "DELETE",
 	});
-    console.log(`${response.ok}, ${id}`)
 	if (!response.ok) {
     	throw new Error("Failed to delete expense");
 	}

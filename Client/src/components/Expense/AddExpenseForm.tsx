@@ -20,7 +20,7 @@ const AddExpenseForm = () => {
       description,
       cost: Number(cost),
     }
-
+    
     createExpense(newExpense);
     setExpenses([...expenses, newExpense]);
 

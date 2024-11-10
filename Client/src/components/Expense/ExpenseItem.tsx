@@ -3,6 +3,7 @@ import { Expense } from "../../types/types";
 import {useContext} from "react"
 import { deleteExpense } from "../../utils/expense-utils";
 
+
 const ExpenseItem = (currentExpense: Expense) => {
   // Exercise: Consume the AppContext here
   const {expenses, setExpenses} = useContext(AppContext)

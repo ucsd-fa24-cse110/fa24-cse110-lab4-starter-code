@@ -23,10 +23,9 @@ export const updateBudget = async (budget: number): Promise<number> => {
     });
 
     if (!response.ok) {
-        const errorMessage = await response.text();
-        throw new Error(`Failed to update budget: ${response.status} ${errorMessage}`);
+        throw new Error(`Failed to update budget`);
     }
 
-    const receivedBudget = await response.json();
-    return receivedBudget;
+    const fetchedBudget = await response.json();
+    return fetchedBudget;
 };
